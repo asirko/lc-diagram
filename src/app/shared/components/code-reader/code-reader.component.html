@@ -1,0 +1,17 @@
+<div class="content">
+  <ng-content></ng-content>
+</div>
+
+<ul>
+  <li (click)="toggleActive('ts')" [class.active]="active === 'ts'">TypeScript</li>
+  <li (click)="toggleActive('html')" [class.active]="active === 'html'">HTML</li>
+  <li (click)="toggleActive('scss')" [class.active]="active === 'scss'">SCSS</li>
+
+  <span>{{ name }}</span>
+</ul>
+
+<ng-container [ngSwitch]="active">
+  <markdown *ngSwitchCase="'ts'" [src]="path + '.ts'" clipboard></markdown>
+  <markdown *ngSwitchCase="'html'" [src]="path + '.html'" clipboard></markdown>
+  <markdown *ngSwitchCase="'scss'" [src]="path + '.scss'" clipboard></markdown>
+</ng-container>

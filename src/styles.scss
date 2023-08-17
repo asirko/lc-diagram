@@ -1,1 +1,84 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@fontsource/montserrat';
+@import 'remixicon/fonts/remixicon.css';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+$color-primary: #0074e4;
+$color-validation: #1abc9c;
+$color-alert: #f39c12;
+$color-error: #e74c3c;
+$color-gray: #aaaaaa;
+
+:root {
+  --color-white: #ffffff;
+  --color-primary: #{$color-primary};
+  --color-primary-lighter: #{lighten($color-primary, 25%)};
+  --color-primary-lightest: #{lighten($color-primary, 45%)};
+  --color-primary-darker: #{darken($color-primary, 15%)};
+  --color-primary-darkest: #{darken($color-primary, 30%)};
+  --color-gray: #{$color-gray};
+  --color-gray-lighter: #{lighten($color-gray, 20%)};
+  --color-gray-lightest: #{lighten($color-gray, 28%)};
+  --color-gray-darker: #{darken($color-gray, 15%)};
+  --color-gray-darkest: #{darken($color-gray, 30%)};
+  --color-validation: #{$color-validation};
+  --color-alert: #{$color-alert};
+  --color-error: #{$color-error};
+
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: 2rem;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --space-s: 0.25rem;
+    --space-m: 0.5rem;
+    --space-l: 1rem;
+  }
+}
+
+.markdown-clipboard-button {
+  font-family: 'remixicon' !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  font-size: 0;
+  background-color: transparent;
+  color: var(--color-primary);
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    scale: 1.2;
+  }
+
+  &:before {
+    content: '\eb86';
+    font-size: 1.5rem;
+  }
+
+  &.copied:before {
+    content: '\eb88';
+  }
+}
+
+#theme {
+  .token.operator,
+  .token.entity,
+  .token.url,
+  .language-css .token.string,
+  .style .token.string,
+  :not(pre) > code[class*='language-'],
+  pre[class*='language-'] {
+    background: var(--color-gray-lightest);
+  }
+  pre[class*='language-'] {
+    margin: 0;
+  }
+}
