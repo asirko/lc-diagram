@@ -15,6 +15,6 @@ export class LayoutComponent {
   private route = inject(ActivatedRoute);
 
   readonly menu = this.route
-    .routeConfig!.children!.filter(rc => rc.title)
-    .map(rc => ({ path: rc.path, title: rc.title }));
+    .routeConfig!.children!.filter(rc => rc.data)
+    .map(rc => ({ path: rc.path, title: rc.data!['title'] }));
 }

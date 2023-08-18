@@ -22,6 +22,7 @@ h1 {
   white-space: nowrap;
   font-size: var(--space-l);
   margin-right: 2em;
+  cursor: pointer;
 }
 
 input {
@@ -39,6 +40,7 @@ ul {
   display: flex;
   gap: var(--space-m);
   list-style: none;
+  margin: 0;
 }
 
 li {

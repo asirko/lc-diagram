@@ -1,0 +1,39 @@
+.markdown-clipboard-button {
+  font-family: 'remixicon' !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  font-size: 0;
+  background-color: transparent;
+  color: var(--color-primary);
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    scale: 1.2;
+  }
+
+  &:before {
+    content: '\eb86';
+    font-size: 1.5rem;
+  }
+
+  &.copied:before {
+    content: '\eb88';
+  }
+}
+
+#theme {
+  .token.operator,
+  .token.entity,
+  .token.url,
+  .language-css .token.string,
+  .style .token.string,
+  :not(pre) > code[class*='language-'],
+  pre[class*='language-'] {
+    background: var(--color-gray-lightest);
+  }
+  pre[class*='language-'] {
+    margin: 0;
+  }
+}
