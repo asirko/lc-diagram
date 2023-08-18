@@ -11,7 +11,7 @@
 </ul>
 
 <ng-container [ngSwitch]="active">
-  <markdown ngPreserveWhitespaces *ngSwitchCase="'ts'" [src]="path + '.ts'" clipboard></markdown>
+  <markdown *ngSwitchCase="'ts'" [src]="path + '.ts'" clipboard></markdown>
   <markdown *ngSwitchCase="'html'" [src]="path + '.html'" clipboard></markdown>
   <markdown *ngSwitchCase="'scss'" [src]="path + '.scss'" clipboard></markdown>
 </ng-container>

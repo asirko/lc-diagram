@@ -8,6 +8,5 @@ import { CommonModule } from '@angular/common';
   templateUrl: './basic-example.component.html',
   styleUrls: ['./basic-example.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  preserveWhitespaces: true,
 })
 export class BasicExampleComponent {}
