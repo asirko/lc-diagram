@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
+    "build": "ng build --configuration production",
     "deploy": "ng deploy --base-href=https://svg.projects.lets-code.fr/"
   },
   "private": true,

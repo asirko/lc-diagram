@@ -89,6 +89,7 @@ main {
     background-color: rgba(black, 0.5);
     translate: -100%;
     transition: 0.5s;
+    z-index: 1;
   }
 
   input:checked ~ nav {
@@ -100,6 +101,7 @@ main {
     align-items: flex-start;
     padding: var(--space-l) 0;
     background-color: white;
+    gap: 0;
   }
 
   li {
