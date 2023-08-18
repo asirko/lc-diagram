@@ -2,13 +2,13 @@
   <input id="toggle-menu" type="checkbox" #checkbox />
   <i class="layout-menu ri-menu-line" (click)="checkbox.click()"></i>
 
-  <h1>
+  <h1 routerLink="00-intro">
     Angular + SVG =
     <i class="ri-service-line"></i>
   </h1>
 
-  <nav>
-    <ul (click)="checkbox.click()">
+  <nav (click)="checkbox.click()">
+    <ul>
       <li *ngFor="let entry of menu" [routerLink]="[entry.path]" routerLinkActive="active">
         <a>{{ entry.title }}</a>
       </li>

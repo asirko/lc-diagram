@@ -1,0 +1,34 @@
+$color-primary: #0074e4;
+$color-validation: #1abc9c;
+$color-alert: #f39c12;
+$color-error: #e74c3c;
+$color-gray: #aaaaaa;
+
+:root {
+  --color-white: #ffffff;
+  --color-primary: #{$color-primary};
+  --color-primary-lighter: #{lighten($color-primary, 25%)};
+  --color-primary-lightest: #{lighten($color-primary, 45%)};
+  --color-primary-darker: #{darken($color-primary, 15%)};
+  --color-primary-darkest: #{darken($color-primary, 30%)};
+  --color-gray: #{$color-gray};
+  --color-gray-lighter: #{lighten($color-gray, 20%)};
+  --color-gray-lightest: #{lighten($color-gray, 28%)};
+  --color-gray-darker: #{darken($color-gray, 15%)};
+  --color-gray-darkest: #{darken($color-gray, 30%)};
+  --color-validation: #{$color-validation};
+  --color-alert: #{$color-alert};
+  --color-error: #{$color-error};
+
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: 2rem;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --space-s: 0.25rem;
+    --space-m: 0.5rem;
+    --space-l: 1rem;
+  }
+}
