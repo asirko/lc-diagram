@@ -60,7 +60,7 @@
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-markup.min.js",
               "node_modules/prismjs/components/prism-typescript.min.js",
-              "node_modules/prismjs/components/prism-sass.min.js",
+              "node_modules/prismjs/components/prism-scss.min.js",
               "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js",
               "node_modules/emoji-toolkit/lib/js/joypixels.min.js",
               "node_modules/clipboard/dist/clipboard.min.js"
