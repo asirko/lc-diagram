@@ -21,3 +21,12 @@ ol {
   margin: var(--space-s) 0;
   padding-left: var(--space-l);
 }
+
+code {
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--color-primary-darker);
+}
+
+em {
+  color: var(--color-primary-darker);
+}

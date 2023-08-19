@@ -1,1 +1,28 @@
-<p>composant-svg works!</p>
+<h3>Comment le SVG est intégré à Angular</h3>
+
+<h4>Exemple&nbsp;:</h4>
+
+<lcd-code-reader path="./app/features/02-component-svg/parent/parent.component">
+  <lcd-parent />
+</lcd-code-reader>
+<lcd-code-reader
+  [supportedExtension]="['ts', 'svg']"
+  [highlight]="{ ts: '5, 8' }"
+  path="./app/features/02-component-svg/child/child.component" />
+
+<h4>À noter&nbsp;:</h4>
+
+<ul>
+  <li>
+    Les <em>custom elements</em> ne sont pas supporté en SVG, il faut donc faire un sélecteur par attribut (<code
+      >selector: '[attribute]'</code
+    >)&nbsp;;
+  </li>
+  <li>
+    Les attributs SVG n'ont pas d'équivalent en propriété, il faut donc utiliser (<code>[attr.attribut]</code>)&nbsp;;
+  </li>
+  <li>
+    Le parser Angular ne reconnait pas directement les balises SVG dans les templates SVG, il faut leur ajoute le préfix
+    (<code>&lt;svg:rect&gt;</code>)&nbsp;;
+  </li>
+</ul>

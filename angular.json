@@ -53,7 +53,8 @@
             "styles": [
               "src/styles.scss",
               "node_modules/prismjs/themes/prism.css",
-              "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css"
+              "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css",
+              "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.css"
             ],
             "scripts": [
               "node_modules/marked/marked.min.js",
@@ -63,7 +64,8 @@
               "node_modules/prismjs/components/prism-scss.min.js",
               "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js",
               "node_modules/emoji-toolkit/lib/js/joypixels.min.js",
-              "node_modules/clipboard/dist/clipboard.min.js"
+              "node_modules/clipboard/dist/clipboard.min.js",
+              "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js"
             ]
           },
           "configurations": {

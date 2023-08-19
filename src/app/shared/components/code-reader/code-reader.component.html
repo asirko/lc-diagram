@@ -3,15 +3,24 @@
 </div>
 
 <ul>
-  <li (click)="toggleActive('ts')" [class.active]="active === 'ts'">TypeScript</li>
-  <li (click)="toggleActive('html')" [class.active]="active === 'html'">HTML</li>
-  <li (click)="toggleActive('scss')" [class.active]="active === 'scss'">SCSS</li>
+  <li
+    *ngFor="let extension of supportedExtension"
+    (click)="toggleActive(extension)"
+    [class.active]="active === extension"
+    >{{ extension | uppercase }}</li
+  >
 
   <span>{{ name }}</span>
 </ul>
 
 <ng-container [ngSwitch]="active">
-  <markdown *ngSwitchCase="'ts'" [src]="path + '.ts'" clipboard></markdown>
-  <markdown *ngSwitchCase="'html'" [src]="path + '.html'" clipboard></markdown>
-  <markdown *ngSwitchCase="'scss'" [src]="path + '.scss'" clipboard></markdown>
+  <ng-container *ngFor="let extension of supportedExtension">
+    <markdown
+      *ngSwitchCase="extension"
+      [src]="path + '.' + extension"
+      clipboard
+      lineNumbers
+      lineHighlight
+      [line]="highlight?.[extension]"></markdown>
+  </ng-container>
 </ng-container>

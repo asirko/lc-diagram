@@ -11,15 +11,17 @@ import { MarkdownModule } from 'ngx-markdown';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeReaderComponent implements OnChanges {
-  @Input() path!: string;
-  active: 'html' | 'ts' | 'scss' | null = null;
+  @Input({ required: true }) path!: string;
+  @Input() supportedExtension: string[] = ['ts', 'html', 'scss'];
+  @Input() highlight?: Record<string, string>;
+  active: string | null = null;
   name!: string;
 
   ngOnChanges(): void {
     this.name = this.path.split('/').at(-1)!;
   }
 
-  toggleActive(type: 'html' | 'ts' | 'scss'): void {
+  toggleActive(type: string): void {
     this.active = this.active === type ? null : type;
   }
 }
