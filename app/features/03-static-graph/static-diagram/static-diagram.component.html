@@ -1,0 +1,21 @@
+<svg *ngIf="viewBox" xmlns="http://www.w3.org/2000/svg" [attr.viewBox]="viewBox">
+  <defs>
+    <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" />
+    </marker>
+  </defs>
+
+  <path
+    *ngFor="let arrowPath of arrowPaths"
+    [attr.d]="arrowPath"
+    stroke="#000"
+    fill="none"
+    stroke-width="2"
+    marker-end="url(#arrowhead)" />
+</svg>
+
+<div class="dep-row" *ngFor="let dependencies of dependenciesByDepth">
+  <div class="dep" #depDiv [attr.data-name]="dep" *ngFor="let dep of dependencies">
+    {{ dep }}
+  </div>
+</div>

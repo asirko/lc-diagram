@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200">
+  <g lcdGrabableDot [(x)]="start.x" [(y)]="start.y"></g>
+  <g lcdGrabableDot [(x)]="startTarget.x" [(y)]="startTarget.y"></g>
+  <g lcdGrabableDot [(x)]="endTarget.x" [(y)]="endTarget.y"></g>
+  <g lcdGrabableDot [(x)]="end.x" [(y)]="end.y"></g>
+
+  <line [attr.x1]="start.x" [attr.y1]="start.y" [attr.x2]="startTarget.x" [attr.y2]="startTarget.y"></line>
+  <line [attr.x1]="end.x" [attr.y1]="end.y" [attr.x2]="endTarget.x" [attr.y2]="endTarget.y"></line>
+
+  <path [attr.d]="path"></path>
+</svg>
+
+<table>
+  <tr>
+    <th></th>
+    <th>X</th>
+    <th>Y</th>
+  </tr>
+  <tr>
+    <th>Start</th>
+    <td>{{ start.x | number: '1.0-0' }}</td>
+    <td>{{ start.y | number: '1.0-0' }}</td>
+  </tr>
+  <tr>
+    <th>Start target</th>
+    <td>{{ startTarget.x | number: '1.0-0' }}</td>
+    <td>{{ startTarget.y | number: '1.0-0' }}</td>
+  </tr>
+  <tr>
+    <th>End</th>
+    <td>{{ end.x | number: '1.0-0' }}</td>
+    <td>{{ end.y | number: '1.0-0' }}</td>
+  </tr>
+  <tr>
+    <th>End target</th>
+    <td>{{ endTarget.x | number: '1.0-0' }}</td>
+    <td>{{ endTarget.y | number: '1.0-0' }}</td>
+  </tr>
+</table>
