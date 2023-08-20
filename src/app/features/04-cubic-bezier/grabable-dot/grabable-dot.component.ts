@@ -20,7 +20,10 @@ export class GrabableDotComponent {
   @Output() xChange = new EventEmitter<number>();
   @Output() yChange = new EventEmitter<number>();
 
-  startDraggingTouch() {
+  startDraggingTouch(event: TouchEvent) {
+    // prevent pull to refresh
+    event.preventDefault();
+
     fromEvent<TouchEvent>(document, 'touchmove')
       .pipe(
         map(e => ({ x: e.touches[0].clientX, y: e.touches[0].clientY })),

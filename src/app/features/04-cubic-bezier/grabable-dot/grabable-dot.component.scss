@@ -6,7 +6,6 @@ circle {
   cursor: grab;
   fill: transparent;
   transition: fill 0.2s ease-in-out;
-  z-index: 1;
 
   &:hover {
     fill: rgba(0, 0, 0, 0.2);

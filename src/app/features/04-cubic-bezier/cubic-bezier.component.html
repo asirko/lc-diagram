@@ -8,3 +8,15 @@
 <lcd-code-reader
   [supportedExtension]="['ts', 'svg', 'scss']"
   path="./app/features/04-cubic-bezier/grabable-dot/grabable-dot.component" />
+
+<p>
+  <strong>Attention&nbsp;:</strong> le <code>z-index</code> ne fonctionne pas dans SVG. Il faut donc faire attention à
+  l'ordre des éléments dans le DOM.
+</p>
+
+<footer class="resources">
+  <ul>
+    <li><a href="https://www.w3.org/TR/SVG2/render.html#RenderingOrder">Les stacking context d'SVG</a></li>
+    <li><a href="https://stackoverflow.com/a/25302276/4092518">Alternative au z-index dans SVG</a></li>
+  </ul>
+</footer>
