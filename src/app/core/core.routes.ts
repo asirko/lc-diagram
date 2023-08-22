@@ -38,7 +38,7 @@ export const routes: Routes = [
       {
         path: '05-diagram',
         data: { title: 'Diagramme' },
-        loadComponent: () => import('../features/05-diagram/diagram.component'),
+        loadComponent: () => import('../features/05-diagram/diagram-page.component'),
       },
     ],
   },

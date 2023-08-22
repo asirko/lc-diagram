@@ -1,0 +1,84 @@
+$width: 180px;
+$height: 96px;
+$lineHeight: 24px;
+
+:host {
+  cursor: grab;
+}
+
+rect {
+  fill: white;
+  stroke: black;
+  width: $width;
+  height: $height;
+  rx: 10;
+}
+
+.content {
+  width: $width;
+  height: $height;
+  padding: calc($lineHeight / 2);
+}
+
+.label {
+  width: 100%;
+  height: calc($lineHeight * 3);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: $lineHeight;
+  text-align: center;
+  user-select: none;
+
+  .editing & {
+    display: none;
+  }
+}
+
+textarea {
+  display: none;
+  width: 100%;
+  height: calc($lineHeight * 3);
+  border: none;
+  line-height: $lineHeight;
+  outline: none;
+
+  .editing & {
+    display: block;
+  }
+}
+
+.menu {
+  width: 100px;
+  transform: translateX($width);
+  overflow: visible;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+
+  :host:hover & {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  ul {
+    padding: var(--space-s);
+  }
+
+  li {
+    list-style: none;
+  }
+
+  button {
+    border: none;
+    background: transparent;
+    color: var(--color-primary-darker);
+    white-space: nowrap;
+    padding: 0;
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
