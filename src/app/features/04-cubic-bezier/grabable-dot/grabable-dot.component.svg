@@ -1,4 +1,7 @@
-<svg:circle></svg:circle>
+<svg:circle
+  r="4"
+  [attr.cx]="x"
+  [attr.cy]="y"></svg:circle>
 <svg:circle
   class="grabable"
   r="20"
