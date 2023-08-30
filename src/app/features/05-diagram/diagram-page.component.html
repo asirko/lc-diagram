@@ -1,5 +1,7 @@
 <h3>Diagramme interactif, un exemple complet</h3>
 
+<p><em>Ne prends pas encompte les événements mobiles</em></p>
+
 <lcd-code-reader path="./app/features/05-diagram/diagram/diagram.component">
   <lcd-diagram />
 </lcd-code-reader>
@@ -9,7 +11,7 @@
 <lcd-code-reader
   [supportedExtension]="['ts', 'svg', 'scss']"
   path="./app/features/05-diagram/diagram/node/node.component" />
-<lcd-code-reader [supportedExtension]="['ts', 'svg', 'scss']" path="./app/features/05-diagram/diagram/diagram.store" />
+<lcd-code-reader [supportedExtension]="['ts']" path="./app/features/05-diagram/diagram/diagram.store" />
 
 <div class="controls">
   <button routerLink="../04-cubic-bezier">Précédent</button>

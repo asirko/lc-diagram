@@ -2,16 +2,21 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
+  EventEmitter,
   HostBinding,
-  HostListener,
   inject,
   Input,
   OnInit,
+  Output,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { animationFrameScheduler, auditTime, filter, finalize, fromEvent, takeUntil, tap } from 'rxjs';
+import { animationFrameScheduler, auditTime, filter, finalize, fromEvent, startWith, takeUntil, tap } from 'rxjs';
 import { DiagramStore } from '../diagram.store';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { DiagramConst } from '../diagram.const';
 
 @Component({
   selector: '[lcdNode]',
@@ -24,8 +29,11 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 export class NodeComponent implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly store = inject(DiagramStore);
+  private readonly renderer = inject(Renderer2);
+  private readonly elementRef = inject(ElementRef);
 
-  @Input({ required: true }) nodeId!: number;
+  @HostBinding('attr.data-node-id') @Input({ required: true }) nodeId!: number;
+  @Output() drawArrow = new EventEmitter<MouseEvent>();
 
   x = 0;
   y = 100;
@@ -33,8 +41,10 @@ export class NodeComponent implements OnInit {
   nameCtrl = new FormControl('', { nonNullable: true });
   editing = false;
 
+  @ViewChild('ghost') ghostRef!: ElementRef<SVGRectElement>;
+
   ngOnInit(): void {
-    const node = this.store.getNodeSnapshot(this.nodeId)!;
+    const node = this.store.getNodeSnapshot(this.nodeId);
     this.x = node.x;
     this.y = node.y;
     this.nameCtrl.setValue(node.name);
@@ -44,29 +54,28 @@ export class NodeComponent implements OnInit {
     return `translate(${this.x}, ${this.y})`;
   }
 
-  @HostListener('mousedown', ['$event']) onMouseDown(downEvent: MouseEvent) {
+  onMouseDown(downEvent: MouseEvent) {
     // by placing this node at the last place in the array, we ensure that it will be rendered on top of the other nodes
-    this.store.putToLast(this.nodeId);
+    this.store.putNodeToLast(this.nodeId);
 
-    const initialX = this.x;
-    const initialY = this.y;
+    this.renderer.addClass(this.elementRef.nativeElement, 'dragging');
+    const ghostPos = { x: this.x, y: this.y };
 
     let cancelled = false;
     const cancel$ = fromEvent<KeyboardEvent>(document, 'keydown').pipe(
       filter((e: KeyboardEvent) => e.key === 'Escape'),
-      tap(() => {
-        cancelled = true;
-        this.x = initialX;
-        this.y = initialY;
-        this.cdr.markForCheck();
-      }),
+      tap(() => (cancelled = true)),
     );
 
     const drop$ = fromEvent(document, 'mouseup').pipe(
       finalize(() => {
         if (!cancelled) {
+          this.x += ghostPos.x;
+          this.y += ghostPos.y;
           this.store.updateNode(this.nodeId, { x: this.x, y: this.y });
         }
+        this.renderer.removeClass(this.elementRef.nativeElement, 'dragging');
+        this.cdr.markForCheck();
       }),
     );
 
@@ -75,12 +84,13 @@ export class NodeComponent implements OnInit {
         takeUntil(drop$),
         takeUntil(cancel$),
         auditTime(0, animationFrameScheduler),
+        startWith(downEvent),
         filter(() => !cancelled),
       )
       .subscribe((event: MouseEvent) => {
-        this.x = initialX + event.clientX - downEvent.clientX;
-        this.y = initialY + event.clientY - downEvent.clientY;
-        this.cdr.markForCheck();
+        ghostPos.x = event.clientX - downEvent.clientX;
+        ghostPos.y = event.clientY - downEvent.clientY;
+        this.ghostRef.nativeElement.setAttribute('transform', `translate(${ghostPos.x}, ${ghostPos.y})`);
       });
   }
 
@@ -98,13 +108,13 @@ export class NodeComponent implements OnInit {
   }
 
   validateEdition() {
-    this.store.updateNode(this.nodeId, { name: this.nameCtrl.value });
     this.editing = false;
+    this.store.updateNode(this.nodeId, { name: this.nameCtrl.value });
   }
 
   addNode() {
-    this.store.addNode({ x: this.x + 250, y: this.y });
-    this.store.putToLast(this.nodeId);
+    this.store.addNode({ x: this.x + DiagramConst.RECT_WIDTH * 1.5, y: this.y }, this.nodeId);
+    this.store.putNodeToLast(this.nodeId);
   }
 
   deleteNode() {

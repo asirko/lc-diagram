@@ -1,33 +1,32 @@
-$width: 180px;
-$height: 96px;
-$lineHeight: 24px;
-
 :host {
   cursor: grab;
+}
+:host-context(.drawing-arrow) :host {
+  cursor: pointer;
 }
 
 rect {
   fill: white;
   stroke: black;
-  width: $width;
-  height: $height;
-  rx: 10;
+  width: var(--rect-width);
+  height: var(--rect-height);
+  rx: var(--circle-radius);
 }
 
 .content {
-  width: $width;
-  height: $height;
-  padding: calc($lineHeight / 2);
+  width: var(--rect-width);
+  height: var(--rect-height);
+  padding: calc(var(--line-height) / 2);
 }
 
 .label {
   width: 100%;
-  height: calc($lineHeight * 3);
+  height: calc(var(--line-height) * 3);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  line-height: $lineHeight;
+  line-height: var(--line-height);
   text-align: center;
   user-select: none;
 
@@ -39,9 +38,9 @@ rect {
 textarea {
   display: none;
   width: 100%;
-  height: calc($lineHeight * 3);
+  height: calc(var(--line-height) * 3);
   border: none;
-  line-height: $lineHeight;
+  line-height: var(--line-height);
   outline: none;
 
   .editing & {
@@ -51,7 +50,7 @@ textarea {
 
 .menu {
   width: 100px;
-  transform: translateX($width);
+  transform: translateX(var(--rect-width));
   overflow: visible;
   opacity: 0;
   pointer-events: none;
@@ -80,5 +79,20 @@ textarea {
     &:hover {
       opacity: 1;
     }
+  }
+}
+
+.ghost {
+  opacity: 0;
+  pointer-events: none;
+}
+
+:host(.dragging) {
+  rect {
+    stroke: rgba(0, 0, 0, 0.3);
+  }
+  .ghost {
+    opacity: 1;
+    stroke: rgba(0, 0, 0, 1);
   }
 }
