@@ -1,0 +1,17 @@
+<svg [attr.viewBox]="viewBox" #svgContainerRef>
+  <svg:defs>
+    <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" />
+    </marker>
+  </svg:defs>
+
+  <svg:g *ngFor="let arrow of arrows$ | async; trackBy: trackById" lcdArrow [arrowId]="arrow.id"></svg:g>
+
+  <svg:path *ngIf="ghostArrowPath" [attr.d]="ghostArrowPath" marker-end="url(#arrowhead)" />
+
+  <svg:g
+    *ngFor="let node of nodes$ | async; trackBy: trackById"
+    lcdNode
+    [nodeId]="node.id"
+    (drawArrow)="drawArrowFrom(node, $event)"></svg:g>
+</svg>

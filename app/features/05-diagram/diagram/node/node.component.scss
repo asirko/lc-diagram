@@ -1,0 +1,98 @@
+:host {
+  cursor: grab;
+}
+:host-context(.drawing-arrow) :host {
+  cursor: pointer;
+}
+
+rect {
+  fill: white;
+  stroke: black;
+  width: var(--rect-width);
+  height: var(--rect-height);
+  rx: var(--circle-radius);
+}
+
+.content {
+  width: var(--rect-width);
+  height: var(--rect-height);
+  padding: calc(var(--line-height) / 2);
+}
+
+.label {
+  width: 100%;
+  height: calc(var(--line-height) * 3);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: var(--line-height);
+  text-align: center;
+  user-select: none;
+
+  .editing & {
+    display: none;
+  }
+}
+
+textarea {
+  display: none;
+  width: 100%;
+  height: calc(var(--line-height) * 3);
+  border: none;
+  line-height: var(--line-height);
+  outline: none;
+
+  .editing & {
+    display: block;
+  }
+}
+
+.menu {
+  width: 100px;
+  transform: translateX(var(--rect-width));
+  overflow: visible;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+
+  :host:hover & {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  ul {
+    padding: var(--space-s);
+  }
+
+  li {
+    list-style: none;
+  }
+
+  button {
+    border: none;
+    background: transparent;
+    color: var(--color-primary-darker);
+    white-space: nowrap;
+    padding: 0;
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.ghost {
+  opacity: 0;
+  pointer-events: none;
+}
+
+:host(.dragging) {
+  rect {
+    stroke: rgba(0, 0, 0, 0.3);
+  }
+  .ghost {
+    opacity: 1;
+    stroke: rgba(0, 0, 0, 1);
+  }
+}

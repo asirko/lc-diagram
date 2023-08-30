@@ -36,9 +36,9 @@ export const routes: Routes = [
         loadComponent: () => import('../features/04-cubic-bezier/cubic-bezier.component'),
       },
       {
-        path: '05-dynamic-graph',
+        path: '05-diagram',
         data: { title: 'Diagramme' },
-        loadComponent: () => import('../features/05-diagram/diagram.component'),
+        loadComponent: () => import('../features/05-diagram/diagram-page.component'),
       },
     ],
   },

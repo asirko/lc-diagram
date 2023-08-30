@@ -1,0 +1,8 @@
+const LINE_HEIGHT = 24;
+
+export const DiagramConst = {
+  CIRCLE_RADIUS: LINE_HEIGHT / 3,
+  LINE_HEIGHT,
+  RECT_WIDTH: LINE_HEIGHT * 7,
+  RECT_HEIGHT: LINE_HEIGHT * 4,
+};

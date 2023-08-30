@@ -1,0 +1,24 @@
+<svg:rect/>
+
+<foreignObject [class.editing]="editing" class="content" (mousedown)="onMouseDown($event)">
+  <div xmlns="http://www.w3.org/1999/xhtml">
+    <div class="label" (dblclick)="edit(input)"><pre>{{nameCtrl.value}}</pre></div>
+    <textarea
+            #input [formControl]="nameCtrl"
+            (mousedown)="$event.stopPropagation()"
+            (keydown.escape)="cancelEdit()"
+            (keydown.enter)="validateEdition()" (blur)="validateEdition()"></textarea>
+  </div>
+</foreignObject>
+
+<foreignObject class="menu">
+  <div xmlns="http://www.w3.org/1999/xhtml">
+    <ul>
+      <li><button (click)="addNode()"><i class="ri-add-line"></i> Nœud</button></li>
+      <li><button (click)="drawArrow.next($event)"><i class="ri-add-line"></i> Lien</button></li>
+      <li><button (click)="deleteNode()"><i class="ri-delete-bin-line"></i> Supprimer</button></li>
+    </ul>
+  </div>
+</foreignObject>
+
+<svg:rect class="ghost" #ghost/>
