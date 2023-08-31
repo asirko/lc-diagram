@@ -89,8 +89,9 @@ export class NodeComponent implements OnInit {
         filter(() => !cancelled),
       )
       .subscribe((event: MouseEvent) => {
-        ghostPos.x = event.clientX - downEvent.clientX;
-        ghostPos.y = event.clientY - downEvent.clientY;
+        const zoom = this.store.getConfigSnapshot().zoom;
+        ghostPos.x = (event.clientX - downEvent.clientX) / zoom;
+        ghostPos.y = (event.clientY - downEvent.clientY) / zoom;
         this.ghostRef.nativeElement.setAttribute('transform', `translate(${ghostPos.x}, ${ghostPos.y})`);
       });
   }

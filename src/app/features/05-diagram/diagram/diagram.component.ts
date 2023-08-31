@@ -22,6 +22,7 @@ import {
   finalize,
   fromEvent,
   map,
+  pairwise,
   startWith,
   takeUntil,
   tap,
@@ -50,6 +51,7 @@ export class DiagramComponent implements AfterViewChecked, AfterViewInit {
   arrows$ = this.store.arrows$;
 
   ghostArrowPath: string | null = null;
+  initialZoom = this.store.getConfigSnapshot().zoom;
 
   ngAfterViewInit(): void {
     const ne = this.elementRef.nativeElement;
@@ -61,7 +63,8 @@ export class DiagramComponent implements AfterViewChecked, AfterViewInit {
 
   ngAfterViewChecked() {
     const { width, height } = this.svgContainerRef.nativeElement.getBoundingClientRect();
-    const viewBox = `-10 -10 ${width - 10} ${height - 10}`;
+    const { offset, zoom } = this.store.getConfigSnapshot();
+    const viewBox = `${offset.x} ${offset.y} ${width / zoom} ${height / zoom}`;
     if (viewBox !== this.viewBox) {
       this.viewBox = viewBox;
       this.cdr.detectChanges();
@@ -109,7 +112,8 @@ export class DiagramComponent implements AfterViewChecked, AfterViewInit {
         map(({ nodeId, event }) => {
           if (!nodeId) {
             const { top, left } = this.svgContainerRef.nativeElement.getBoundingClientRect();
-            return { x: event.clientX - left, y: event.clientY - top };
+            const { offset, zoom } = this.store.getConfigSnapshot();
+            return { x: (event.clientX - left) / zoom + offset.x, y: (event.clientY - top) / zoom + offset.y };
           }
 
           const endNode = this.store.getNodeSnapshot(+nodeId);
@@ -121,5 +125,35 @@ export class DiagramComponent implements AfterViewChecked, AfterViewInit {
         this.ghostArrowPath = `M${startPos.x},${startPos.y} L${to.x},${to.y}`;
         this.cdr.markForCheck();
       });
+  }
+
+  moveDiagram(downEvent: MouseEvent) {
+    if (downEvent.currentTarget !== downEvent.target) {
+      return;
+    }
+    fromEvent<MouseEvent>(document, 'mousemove')
+      .pipe(
+        takeUntil(fromEvent<MouseEvent>(document, 'mouseup')),
+        auditTime(0, animationFrameScheduler),
+        startWith(downEvent),
+        pairwise(),
+        map(([prev, next]) => {
+          const zoom = this.store.getConfigSnapshot().zoom;
+          return { x: (next.clientX - prev.clientX) / zoom, y: (next.clientY - prev.clientY) / zoom };
+        }),
+      )
+      .subscribe(delta => {
+        const { x, y } = this.store.getConfigSnapshot().offset;
+        this.store.updateConfig({ offset: { x: x - delta.x, y: y - delta.y } });
+        this.cdr.markForCheck();
+      });
+  }
+
+  center() {
+    this.store.center();
+  }
+
+  updateZoom(event: Event) {
+    this.store.updateConfig({ zoom: (event.target as HTMLInputElement).valueAsNumber });
   }
 }
