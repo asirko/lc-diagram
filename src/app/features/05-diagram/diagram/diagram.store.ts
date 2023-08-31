@@ -71,4 +71,8 @@ export class DiagramStore {
   getArrowSnapshot(arrowId: number): DiagramArrow {
     return this._arrows$.getValue().find(arrow => arrow.id === arrowId)!;
   }
+
+  deleteArrow(arrowId: number) {
+    this._arrows$.next(this._arrows$.getValue().filter(arrow => arrow.id !== arrowId));
+  }
 }

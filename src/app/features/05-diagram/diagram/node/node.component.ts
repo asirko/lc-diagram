@@ -17,11 +17,12 @@ import { animationFrameScheduler, auditTime, filter, finalize, fromEvent, startW
 import { DiagramStore } from '../diagram.store';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DiagramConst } from '../diagram.const';
+import { BreakLineToBRPipe } from '../../../../shared/pipes/break-line-to-br.pipe';
 
 @Component({
   selector: '[lcdNode]',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, BreakLineToBRPipe],
   templateUrl: './node.component.svg',
   styleUrls: ['./node.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
