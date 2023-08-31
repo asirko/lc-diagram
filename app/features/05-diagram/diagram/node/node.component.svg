@@ -1,17 +1,17 @@
 <svg:rect/>
 
-<foreignObject [class.editing]="editing" class="content" (mousedown)="onMouseDown($event)">
+<svg:foreignObject [class.editing]="editing" class="content" (mousedown)="onMouseDown($event)">
   <div xmlns="http://www.w3.org/1999/xhtml">
-    <div class="label" (dblclick)="edit(input)"><pre>{{nameCtrl.value}}</pre></div>
+    <div class="label" (dblclick)="edit(input)" [innerHTML]="nameCtrl.value | breakLineToBR"></div>
     <textarea
             #input [formControl]="nameCtrl"
             (mousedown)="$event.stopPropagation()"
             (keydown.escape)="cancelEdit()"
             (keydown.enter)="validateEdition()" (blur)="validateEdition()"></textarea>
   </div>
-</foreignObject>
+</svg:foreignObject>
 
-<foreignObject class="menu">
+<svg:foreignObject class="menu" >
   <div xmlns="http://www.w3.org/1999/xhtml">
     <ul>
       <li><button (click)="addNode()"><i class="ri-add-line"></i> Nœud</button></li>
@@ -19,6 +19,6 @@
       <li><button (click)="deleteNode()"><i class="ri-delete-bin-line"></i> Supprimer</button></li>
     </ul>
   </div>
-</foreignObject>
+</svg:foreignObject>
 
 <svg:rect class="ghost" #ghost/>

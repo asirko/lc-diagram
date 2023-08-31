@@ -3,7 +3,7 @@
 
   legend {
     position: relative;
-    top: -2rem;
+    top: calc(-1 * var(--space-l));
     text-align: center;
   }
 }

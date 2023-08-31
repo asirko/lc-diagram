@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, filter, map, Observable } from 'rxjs';
+import { Point } from '../../../shared/utils/geometry.utils';
 
 export interface DiagramNode {
   id: number;
@@ -14,6 +15,11 @@ export interface DiagramArrow {
   end: number; // nodeId
 }
 
+export interface DiagramConfig {
+  offset: Point;
+  zoom: number;
+}
+
 const INITIAL_NODE = { id: 1, x: 0, y: 100, name: 'Node 1' };
 
 @Injectable({
@@ -26,7 +32,8 @@ export class DiagramStore {
   private readonly _arrows$ = new BehaviorSubject<DiagramArrow[]>([]);
   readonly arrows$ = this._arrows$.asObservable();
 
-  constructor() {}
+  private readonly _config$ = new BehaviorSubject<DiagramConfig>({ offset: { x: -10, y: -10 }, zoom: 1 });
+  readonly config$ = this._arrows$.asObservable();
 
   getNodeSnapshot(nodeId: number): DiagramNode {
     return this._nodes$.getValue().find(node => node.id === nodeId)!;
@@ -70,5 +77,26 @@ export class DiagramStore {
 
   getArrowSnapshot(arrowId: number): DiagramArrow {
     return this._arrows$.getValue().find(arrow => arrow.id === arrowId)!;
+  }
+
+  deleteArrow(arrowId: number) {
+    this._arrows$.next(this._arrows$.getValue().filter(arrow => arrow.id !== arrowId));
+  }
+
+  getConfigSnapshot(): DiagramConfig {
+    return this._config$.getValue();
+  }
+
+  updateConfig(param: Partial<DiagramConfig>) {
+    this._config$.next({ ...this._config$.getValue(), ...param });
+  }
+
+  center() {
+    // prettier-ignore
+    const firstNode = this._nodes$
+      .getValue()
+      .reduce((leftest, node) => (!leftest || node.x < leftest.x ? node : leftest), null as Point | null)
+      || { x: 0, y: 0, };
+    this.updateConfig({ offset: { x: firstNode.x - 10, y: firstNode.y - 100 } });
   }
 }

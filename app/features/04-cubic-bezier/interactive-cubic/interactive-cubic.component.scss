@@ -1,6 +1,6 @@
 :host {
   display: flex;
-  gap: 2rem;
+  gap: var(--space-l);
   justify-content: space-evenly;
 }
 
@@ -26,7 +26,7 @@ table {
 th,
 td {
   border: 1px solid black;
-  padding: 0.5rem 2rem;
+  padding: var(--space-s) var(--space-l);
 }
 
 td {

@@ -1,4 +1,4 @@
-<svg [attr.viewBox]="viewBox" #svgContainerRef>
+<svg [attr.viewBox]="viewBox" #svgContainerRef (mousedown)="moveDiagram($event)">
   <svg:defs>
     <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
       <polygon points="0 0, 6 2, 0 4" />
@@ -15,3 +15,8 @@
     [nodeId]="node.id"
     (drawArrow)="drawArrowFrom(node, $event)"></svg:g>
 </svg>
+
+<div class="menu">
+  <input type="range" [value]="initialZoom" (input)="updateZoom($event)" min="0.5" max="1.5" step="0.1" />
+  <i class="ri-focus-3-line" (click)="center()"></i>
+</div>

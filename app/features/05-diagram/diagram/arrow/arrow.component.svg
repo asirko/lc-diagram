@@ -1,1 +1,17 @@
-<svg:path [attr.d]="path$ | async" marker-end="url(#arrowhead)" />
+<ng-container *ngIf="viewModel$ | async as viewModel">
+  <svg:line
+    [attr.x1]="viewModel.start.x"
+    [attr.y1]="viewModel.start.y"
+    [attr.x2]="viewModel.end.x"
+    [attr.y2]="viewModel.end.y"
+    marker-end="url(#arrowhead)"/>
+  <svg:foreignObject class="menu" [attr.x]="(viewModel.start.x + viewModel.end.x) / 2" [attr.y]="(viewModel.start.y + viewModel.end.y) / 2">
+    <div>
+      <ul>
+        <li>
+          <button (click)="deleteArrow()"><i class="ri-delete-bin-line"></i> Supprimer</button>
+        </li>
+      </ul>
+    </div>
+  </svg:foreignObject>
+</ng-container>

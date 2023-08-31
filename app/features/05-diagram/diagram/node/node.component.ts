@@ -17,11 +17,12 @@ import { animationFrameScheduler, auditTime, filter, finalize, fromEvent, startW
 import { DiagramStore } from '../diagram.store';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DiagramConst } from '../diagram.const';
+import { BreakLineToBRPipe } from '../../../../shared/pipes/break-line-to-br.pipe';
 
 @Component({
   selector: '[lcdNode]',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, BreakLineToBRPipe],
   templateUrl: './node.component.svg',
   styleUrls: ['./node.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -88,8 +89,9 @@ export class NodeComponent implements OnInit {
         filter(() => !cancelled),
       )
       .subscribe((event: MouseEvent) => {
-        ghostPos.x = event.clientX - downEvent.clientX;
-        ghostPos.y = event.clientY - downEvent.clientY;
+        const zoom = this.store.getConfigSnapshot().zoom;
+        ghostPos.x = (event.clientX - downEvent.clientX) / zoom;
+        ghostPos.y = (event.clientY - downEvent.clientY) / zoom;
         this.ghostRef.nativeElement.setAttribute('transform', `translate(${ghostPos.x}, ${ghostPos.y})`);
       });
   }
