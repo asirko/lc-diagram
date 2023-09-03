@@ -12,6 +12,8 @@ svg {
   width: 100%;
   height: 600px;
   user-select: none;
+  cursor: move;
+
   &.drawing-arrow {
     cursor: none;
   }

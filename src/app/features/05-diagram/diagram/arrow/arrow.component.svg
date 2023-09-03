@@ -5,6 +5,13 @@
     [attr.x2]="viewModel.end.x"
     [attr.y2]="viewModel.end.y"
     marker-end="url(#arrowhead)"/>
+  <svg:line class="hoverabled"
+    [attr.x1]="viewModel.start.x"
+    [attr.y1]="viewModel.start.y"
+    [attr.x2]="viewModel.end.x"
+    [attr.y2]="viewModel.end.y"/>
+
+
   <svg:foreignObject class="menu" [attr.x]="(viewModel.start.x + viewModel.end.x) / 2" [attr.y]="(viewModel.start.y + viewModel.end.y) / 2">
     <div>
       <ul>
