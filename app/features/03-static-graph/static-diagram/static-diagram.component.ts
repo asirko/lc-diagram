@@ -79,11 +79,11 @@ export class StaticDiagramComponent implements OnInit, AfterViewChecked {
           const start = { x: startRect.left + startRect.width / 2, y: startRect.top + startRect.height };
           const end = { x: endRect.left + endRect.width / 2, y: endRect.top };
           const direction = start.x > end.x ? -1 : start.x === end.x ? 0 : 1;
-          start.x += (direction * startRect.width) / 6;
-          end.x -= (direction * endRect.width) / 6;
+          // start.x += (direction * startRect.width) / 6;
+          // end.x -= (direction * endRect.width) / 6;
 
           // straight line
-          // this.arrowPaths!.push(`M ${start.x} ${start.y} L ${end.x} ${end.y}`);
+          this.arrowPaths!.push(`M ${start.x} ${start.y} L ${end.x} ${end.y}`);
 
           // cubic bezier curve
           // this.arrowPaths!.push(`M ${start.x} ${start.y} C ${start.x} ${end.y} ${end.x} ${start.y} ${end.x} ${end.y}`);
@@ -95,11 +95,11 @@ export class StaticDiagramComponent implements OnInit, AfterViewChecked {
           // );
 
           // lighter incidence
-          const deltaHorizontal = (start.x - end.x) / 3;
-          this.arrowPaths!.push(
-            `M ${start.x} ${start.y}` +
-              `C ${start.x - deltaHorizontal} ${end.y} ${end.x + deltaHorizontal} ${start.y} ${end.x} ${end.y}`,
-          );
+          // const deltaHorizontal = (start.x - end.x) / 3;
+          // this.arrowPaths!.push(
+          //   `M ${start.x} ${start.y}` +
+          //     `C ${start.x - deltaHorizontal} ${end.y} ${end.x + deltaHorizontal} ${start.y} ${end.x} ${end.y}`,
+          // );
         });
       }
 

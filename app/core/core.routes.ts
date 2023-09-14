@@ -17,12 +17,12 @@ export const routes: Routes = [
       },
       {
         path: '01-svg-example',
-        data: { title: 'SVG\xa0?' },
+        data: { title: 'Pourquoi SVG\xa0?' },
         loadComponent: () => import('../features/01-svg-example/svg-example.component'),
       },
       {
         path: '02-component-svg',
-        data: { title: 'En composant\xa0?' },
+        data: { title: 'SVG et Angular\xa0?' },
         loadComponent: () => import('../features/02-component-svg/component-svg.component'),
       },
       {
@@ -32,12 +32,12 @@ export const routes: Routes = [
       },
       {
         path: '04-cubic-bezier',
-        data: { title: 'Exemple interactif' },
+        data: { title: 'Diagramme interactif' },
         loadComponent: () => import('../features/04-cubic-bezier/cubic-bezier.component'),
       },
       {
         path: '05-diagram',
-        data: { title: 'Diagramme' },
+        data: { title: 'Exemple complet' },
         loadComponent: () => import('../features/05-diagram/diagram-page.component'),
       },
     ],
