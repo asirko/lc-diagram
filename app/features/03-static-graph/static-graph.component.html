@@ -5,8 +5,21 @@
   interactif.
 </p>
 
+<div class="selectors">
+  <div class="selector">
+    <label><input type="checkbox" [(ngModel)]="spaceArrowsValue" /> Centrer les flèches sur les nœuds </label>
+  </div>
+  <div class="selector">
+    <ng-container *ngFor="let arrowShape of arrowShapes">
+      <label>
+        <input type="radio" name="arrowShape" [value]="arrowShape" [(ngModel)]="arrowShapeValue" /> {{ arrowShape }}
+      </label>
+    </ng-container>
+  </div>
+</div>
+
 <lcd-code-reader path="./app/features/03-static-graph/static-diagram/static-diagram.component">
-  <lcd-static-diagram />
+  <lcd-static-diagram [spaceArrows]="spaceArrowsValue" [arrowShape]="arrowShapeValue" />
 </lcd-code-reader>
 
 <div class="controls">
