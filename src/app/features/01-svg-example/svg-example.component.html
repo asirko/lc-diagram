@@ -1,30 +1,83 @@
 <h3>Pourquoi SVG&nbsp;?</h3>
 
+<h4>REX&nbsp;:</h4>
+
+<p>
+  Comment faire un gros formulaire pour construire un parcours de formation avec de conditions&nbsp;? <br />
+  <i class="ri-corner-down-right-fill"></i> Pas facile avec un formulaire, un diagramme serait plus adapté. <br />
+  <i class="ri-corner-down-right-fill"></i> D3.js semblait un bon candidat, mais pas simple à prendre en main. <br />
+  <i class="ri-corner-down-right-fill"></i> Il se trouve qu'SVG est plutôt simple à prendre en main, et s'utilise bien
+  avec Angular. <br />
+</p>
+
+<p>
+  <em>Par contre SVG ne fait pas le café&nbsp;! C'est pas pour tout.</em> <br />
+  Suivant votre besoin, HTML ou Canvas seront plus adaptés.
+</p>
+
+<div class="r-table">
+  <div style="order: 1" class="r-table-header">HTML</div>
+  <div style="order: 2">
+    <ul>
+      <li>tout développeur est à l'aise avec HTML 🎓</li>
+      <li>gestion événementiel (parfaitement intégré à Angular)</li>
+      <li>CSS très puissant</li>
+    </ul>
+  </div>
+  <div style="order: 3">
+    <ul>
+      <li>formes trop basiques</li>
+      <li>très peu adapté pour le dessin 😖 (courbes?, flèches?)</li>
+      <li>peu performant pour un grand nombre d'objets graphiques</li>
+    </ul>
+  </div>
+
+  <div style="order: 1" class="r-table-header">SVG</div>
+  <div style="order: 2">
+    <ul>
+      <li>XML facile à prendre en main</li>
+      <li>c'est fait pour du dessin 💕</li>
+      <li>gestion événementiel (bien intégré à Angular)</li>
+      <li>CSS plutôt bien supporté</li>
+      <li>interopérable 🚀 (outils de dessin, lib comme Lottie, export SVG)</li>
+    </ul>
+  </div>
+  <div style="order: 3">
+    <ul>
+      <li>temps d'apprentissage (viewBox, arcs de cercle)</li>
+      <li>CSS partiellement supporté (pas de z-index 😢)</li>
+      <li>peu performant pour un grand nombre d'objets graphiques</li>
+    </ul>
+  </div>
+
+  <div style="order: 1" class="r-table-header">Canvas</div>
+  <div style="order: 2">
+    <ul>
+      <li>meilleur en performance</li>
+      <li>adapté pour du dessin</li>
+      <li>très polyvalent</li>
+      <li>outilage&nbsp;: WebGL ou ThreeJS 🤟</li>
+    </ul>
+  </div>
+  <div style="order: 3">
+    <ul>
+      <li>temps d'apprentissage</li>
+      <li>tout est à déclarer en JavaScript, peut devenir verbeux</li>
+      <li>
+        outils natifs très bas niveau 😰 (pas facile de faire de la détection de clic, les flèches... , pour l'a10n vous
+        êtes seul)
+      </li>
+    </ul>
+  </div>
+</div>
+
+<h4>Quelques exemples&nbsp;</h4>
+
 <lcd-code-reader
   [supportedExtension]="['html', 'scss']"
   path="./app/features/01-svg-example/basic-example/basic-example.component">
   <lcd-basic-example />
 </lcd-code-reader>
-
-<h4>HTML n'est pas adapté pour tout&nbsp;!</h4>
-
-<p>
-  SVG est fait pour dessiner&nbsp;! <br />
-  Comment faire des courbes en pur HTML&nbsp;? <br />
-  Faire un PieChart&nbsp;? <br />
-</p>
-
-<h4>Pourquoi pas des canvas&nbsp;?</h4>
-
-<p>
-  Les canvas sont des images, pas du texte. <br />
-  Pas de possibilité de sélectionner du texte, de le copier <br />
-  Pas simple de gérer l'accessibilité <br />
-  Pas de possibilité de le modifier avec du CSS. <br />
-  Moins familier pour les développeurs web <br />
-</p>
-
-<p><em>Par contre SVG ne fait pas le café&nbsp;! C'est pas pour tout.</em></p>
 
 <div class="controls">
   <button routerLink="../00-intro">Précédent</button>
