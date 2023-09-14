@@ -1,0 +1,13 @@
+.selectors {
+  margin: var(--space-m) 0;
+}
+
+.selector {
+  label + label {
+    margin-left: var(--space-s);
+  }
+}
+
+label {
+  cursor: pointer;
+}
