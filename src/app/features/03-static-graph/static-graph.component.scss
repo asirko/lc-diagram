@@ -2,12 +2,16 @@
   margin: var(--space-m) 0;
 }
 
-.selector {
-  label + label {
-    margin-left: var(--space-s);
-  }
+.selector label {
+  margin-right: var(--space-s);
 }
 
 label {
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .selectors label {
+    display: block;
+  }
 }

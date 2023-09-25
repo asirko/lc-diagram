@@ -6,9 +6,9 @@
   <li
     *ngFor="let extension of supportedExtension"
     (click)="toggleActive(extension)"
-    [class.active]="active === extension"
-    >{{ extension | uppercase }}</li
-  >
+    [class.active]="active === extension">
+    {{ extension | uppercase }}
+  </li>
 
   <span>{{ name }}</span>
 </ul>

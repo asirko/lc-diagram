@@ -10,11 +10,9 @@
     <label><input type="checkbox" [(ngModel)]="spaceArrowsValue" /> Espacer les flèches sur les nœuds </label>
   </div>
   <div class="selector">
-    <ng-container *ngFor="let arrowShape of arrowShapes">
-      <label>
-        <input type="radio" name="arrowShape" [value]="arrowShape" [(ngModel)]="arrowShapeValue" /> {{ arrowShape }}
-      </label>
-    </ng-container>
+    <label *ngFor="let arrowShape of arrowShapes">
+      <input type="radio" name="arrowShape" [value]="arrowShape" [(ngModel)]="arrowShapeValue" /> {{ arrowShape }}
+    </label>
   </div>
 </div>
 
