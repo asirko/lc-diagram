@@ -11,3 +11,9 @@
 label {
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+  .selectors label {
+    display: block;
+  }
+}
