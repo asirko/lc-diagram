@@ -1,3 +1,9 @@
+.row {
+  display: flex;
+  gap: var(--space-l);
+  justify-content: space-evenly;
+}
+
 .qr-code {
   display: inline-block;
 
@@ -5,5 +11,11 @@
     position: relative;
     top: calc(-1 * var(--space-l));
     text-align: center;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .row {
+    flex-direction: column;
   }
 }
